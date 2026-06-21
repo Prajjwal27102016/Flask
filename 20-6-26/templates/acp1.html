@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Intake Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .results {
+            background: #f4f4f4;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 5px solid #007BFF;
+        }
+
+        .progress-bar {
+            background: #ddd;
+            border-radius: 5px;
+            height: 20px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            background: #28a745;
+            height: 100%;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>💧 Water Intake Tracker</h2>
+
+    <!-- User Input Form -->
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required placeholder="e.g. Alex">
+        </div>
+        <div class="form-group">
+            <label for="goal">Daily Goal (glasses):</label>
+            <input type="number" id="goal" name="goal" min="1" step="0.5" required placeholder="e.g. 8">
+        </div>
+        <div class="form-group">
+            <label for="consumed">Glasses Consumed So Far:</label>
+            <input type="number" id="consumed" name="consumed" min="0" step="0.5" required placeholder="e.g. 3">
+        </div>
+        <button type="submit">Calculate Progress</button>
+    </form>
+
+    {% if name %}
+    <div class="results">
+        <h3>Progress Summary</h3>
+        <p>{{ message }}</p>
+        <p><strong>Goal:</strong> {{ goal }} glasses | <strong>Logged:</strong> {{ consumed }} glasses</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill" data-progress="{{ progress }}">
+                {{ progress }}%
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+    <script>
+        document.querySelectorAll('.progress-fill').forEach(function (el) {
+            var value = el.dataset.progress;
+            if (value) {
+                el.style.width = value + '%';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
