@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Date Calculator</title>
+</head>
+
+<body>
+    <h2>Calculate Days Between Dates</h2>
+    <p>Enter dates in the format: DD-MM-YYYY (e.g., 22-6-2026)</p>
+    <form method="POST">
+        <label>First Date:</label>
+        <input type="text" name="date1" placeholder="DD-MM-YYYY" required><br><br>
+
+        <label>Second Date:</label>
+        <input type="text" name="date2" placeholder="DD-MM-YYYY" required><br><br>
+
+        <button type="submit">Calculate Difference</button>
+    </form>
+
+    {% if error %}
+    <p style="color: red;"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    {% if result is not none %}
+    <h3>The difference is {{ result }} days.</h3>
+    {% endif %}
+</body>
+
+</html>
